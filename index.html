@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Checklist Lukas</title>
+
+<!-- PWA core -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d3b66">
+
+<!-- iOS Add to Home Screen -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Checklist">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background-color: #DCEEFB;
+    color: #1f2d3d;
+    padding: env(safe-area-inset-top, 20px) 16px env(safe-area-inset-bottom, 20px) 16px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    background-color: #F4FAFF;
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 6px 20px rgba(0, 60, 120, 0.08);
+  }
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: #0d3b66;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #5a7a99;
+    margin: 0 0 8px 0;
+  }
+  .progress {
+    font-size: 13px;
+    color: #5a7a99;
+    margin: 0 0 24px 0;
+    font-weight: 500;
+  }
+  h2 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #0d3b66;
+    margin: 24px 0 10px 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #b6d4ee;
+  }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li {
+    padding: 12px 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #5a7a99;
+    border-radius: 50%;
+    margin-right: 14px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    background-color: #fff;
+    transition: all 0.15s ease;
+  }
+  input[type="checkbox"]:checked {
+    background-color: #0d3b66;
+    border-color: #0d3b66;
+  }
+  input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+    color: #94a8bc;
+  }
+  label { cursor: pointer; flex: 1; }
+  .footer {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 2px solid #b6d4ee;
+    font-size: 15px;
+    color: #0d3b66;
+    font-weight: 500;
+    text-align: center;
+  }
+  .reset-btn {
+    display: block;
+    margin: 20px auto 0;
+    background-color: #0d3b66;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    -webkit-appearance: none;
+  }
+  .reset-btn:active { background-color: #1a5490; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Checklist Lukas — Going to Papa</h1>
+    <p class="subtitle">Pack everything in the green or blue suitcase</p>
+    <p class="progress" id="progress">0 of 0 packed</p>
+
+    <h2>Clothing</h2>
+    <ul>
+      <li><input type="checkbox" id="c1"><label for="c1">5 underwear</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">6 t-shirts</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">5 pairs of socks</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">1 jogging suit (pants and jacket)</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">White sailing sweater</label></li>
+      <li><input type="checkbox" id="c6"><label for="c6">Shoes</label></li>
+      <li><input type="checkbox" id="c7"><label for="c7">2 shorts</label></li>
+    </ul>
+
+    <h2>School</h2>
+    <ul>
+      <li><input type="checkbox" id="s1"><label for="s1">School bag</label></li>
+      <li><input type="checkbox" id="s2"><label for="s2">Everything else you need for school</label></li>
+    </ul>
+
+    <h2>Sailing</h2>
+    <ul>
+      <li><input type="checkbox" id="sa2"><label for="sa2">Watch</label></li>
+      <li><input type="checkbox" id="sa3"><label for="sa3">Blue backpack</label></li>
+      <li><input type="checkbox" id="sa4"><label for="sa4">Shorty</label></li>
+    </ul>
+
+    <h2>Misc.</h2>
+    <ul>
+      <li><input type="checkbox" id="m1"><label for="m1">iPad</label></li>
+      <li><input type="checkbox" id="m2"><label for="m2">iPhone</label></li>
+      <li><input type="checkbox" id="m3"><label for="m3">Charger</label></li>
+      <li><input type="checkbox" id="m4"><label for="m4">Cables</label></li>
+      <li><input type="checkbox" id="m5"><label for="m5">PlayStation and cables</label></li>
+      <li><input type="checkbox" id="m6"><label for="m6">Monitor</label></li>
+    </ul>
+
+    <div class="footer">🧳 Put all in the green or blue suitcase</div>
+    <button class="reset-btn" onclick="resetChecklist()">Reset Checklist</button>
+  </div>
+
+  <script>
+    var STORAGE_KEY = 'lukas_checklist_v1';
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var progressEl = document.getElementById('progress');
+
+    function updateProgress() {
+      var total = checkboxes.length;
+      var done = 0;
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) done++;
+      }
+      progressEl.textContent = done + ' of ' + total + ' packed';
+    }
+
+    function saveState() {
+      var state = {};
+      for (var i = 0; i < checkboxes.length; i++) {
+        state[checkboxes[i].id] = checkboxes[i].checked;
+      }
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) { /* private mode or quota — ignore */ }
+    }
+
+    function loadState() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        var state = JSON.parse(raw);
+        for (var i = 0; i < checkboxes.length; i++) {
+          if (state[checkboxes[i].id]) checkboxes[i].checked = true;
+        }
+      } catch (e) { /* corrupt data — ignore */ }
+    }
+
+    function resetChecklist() {
+      if (!confirm('Reset all items?')) return;
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = false;
+      }
+      saveState();
+      updateProgress();
+    }
+
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].addEventListener('change', function () {
+        saveState();
+        updateProgress();
+      });
+    }
+
+    loadState();
+    updateProgress();
+
+    // Register service worker (offline support)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service-worker.js').catch(function () {
+          /* registration failed — app still works */
+        });
+      });
+    }
+  </script>
+</body>
+</html>
